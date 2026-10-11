@@ -1,0 +1,12 @@
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Duplicate of data/raw/CMAPSSData/ (the extracted files are committed)
+data/raw/CMAPSSData.zip
+
+# Office lock files
+~$*

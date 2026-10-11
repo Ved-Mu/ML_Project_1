@@ -1,0 +1,5 @@
+model,CV F1,CV recall,CV ROC-AUC,Test F1,Test recall,Test precision,Test ROC-AUC,Test PR-AUC,Engine-level recall,Engine-level precision
+Logistic Regression,0.866,0.865,0.99,0.706,0.627,0.809,0.989,0.803,0.72,0.947
+Decision Tree,0.859,0.848,0.982,0.671,0.636,0.71,0.966,0.724,0.68,0.944
+Random Forest,0.871,0.848,0.99,0.701,0.614,0.816,0.991,0.807,0.68,0.944
+Gradient Boosting,0.866,0.837,0.99,0.673,0.569,0.822,0.99,0.788,0.68,0.944
