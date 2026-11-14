@@ -21,7 +21,7 @@ pip install -r requirements.txt
 - **See the final model working:** double-click `run_app.bat` (Windows), or
   `cd improved_implementation` then `streamlit run app/streamlit_app.py`. The app trains the model in under a second
   and opens at <http://localhost:8501>.
-- **Re-run the analysis:** `jupyter notebook`, then run `notebooks/01` to `05` in order (about 10 minutes in total).
+- **Re-run the analysis:** `jupyter notebook`, then run `notebooks/01` to `05` in order (about 11 minutes in total on a laptop; notebook 05 takes about 6).
 
 ## Dataset
 - **NASA C-MAPSS** turbofan engine degradation simulation, subset **FD001** (100 training engines run to failure, 100 test engines, 1 operating condition, 1 fault mode).
