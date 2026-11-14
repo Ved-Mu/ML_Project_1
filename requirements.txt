@@ -1,9 +1,12 @@
-pandas
-numpy
-matplotlib
-seaborn
-scikit-learn
-joblib
-jupyter
-pyyaml
-streamlit
+# Tested with Python 3.12 on Windows 11. Exact versions keep every number in the report reproducible.
+pandas==3.0.6
+numpy==2.5.4
+scikit-learn==1.9.1
+matplotlib==3.11.2
+seaborn==0.13.2
+joblib==1.6.0
+pyyaml==6.0.3
+notebook==7.6.3
+ipykernel==7.4.0
+streamlit==1.67.0
+altair==6.3.0
