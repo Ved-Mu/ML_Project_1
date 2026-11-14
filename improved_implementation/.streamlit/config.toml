@@ -4,3 +4,6 @@ primaryColor = "#1f5fa8"
 
 [browser]
 gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"      # hide the developer "Deploy" button during the demo
