@@ -140,10 +140,16 @@ with tab_fleet:
 
     st.subheader(f"One decision per engine at threshold {threshold:.2f}")
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Failing engines caught", f"{tp} of {tp + fn}")
-    c2.metric("Failing engines missed", fn)
-    c3.metric("False alarms", fp)
-    c4.metric("Healthy engines left alone", tn)
+    if reveal:
+        c1.metric("Failing engines caught", f"{tp} of {tp + fn}")
+        c2.metric("Failing engines missed", fn)
+        c3.metric("False alarms", fp)
+        c4.metric("Healthy engines left alone", tn)
+    else:                                   # real use: only the model's decisions are known
+        c1.metric("Engines flagged for inspection", int(fleet["alert"].sum()))
+        c2.metric("Engines left flying", int((~fleet["alert"]).sum()))
+        c3.metric("Highest probability", f"{fleet['probability'].max():.0%}")
+        c4.metric("Engines in the fleet", len(fleet))
 
     fleet["Outcome"] = "Correct, no alert"
     fleet.loc[fleet["alert"] & (fleet["label"] == 1), "Outcome"] = "Correct alert"
@@ -160,11 +166,26 @@ with tab_fleet:
         tooltip=["unit", "cycle", "RUL", alt.Tooltip("probability:Q", format=".1%"), "Outcome"])
     hline = alt.Chart(pd.DataFrame({"y": [threshold]})).mark_rule(
         color="#c0392b", strokeDash=[6, 4]).encode(y="y:Q")
-    vline = alt.Chart(pd.DataFrame({"x": [FAIL_WINDOW]})).mark_rule(
-        color="#34495e", strokeDash=[2, 3]).encode(x="x:Q")
-    st.altair_chart((dots + hline + vline).properties(height=380), width="stretch")
-    st.caption(f"Each dot is one test engine at its last recorded cycle. Engines left of the vertical "
-               f"line really fail within {FAIL_WINDOW} cycles; engines above the dashed red line are flagged.")
+    if reveal:
+        vline = alt.Chart(pd.DataFrame({"x": [FAIL_WINDOW]})).mark_rule(
+            color="#34495e", strokeDash=[2, 3]).encode(x="x:Q")
+        st.altair_chart((dots + hline + vline).properties(height=380), width="stretch")
+        st.caption(f"Each dot is one test engine at its last recorded cycle. Engines left of the vertical "
+                   f"line really fail within {FAIL_WINDOW} cycles; engines above the dashed red line are flagged.")
+    else:
+        fleet["Decision"] = fleet["alert"].map({True: "Inspect now", False: "Keep flying"})
+        blind = alt.Chart(fleet).mark_circle(size=90, opacity=0.85).encode(
+            x=alt.X("cycle:Q", title="Cycles observed so far"),
+            y=alt.Y("probability:Q", title="Predicted probability", axis=alt.Axis(format="%"),
+                    scale=alt.Scale(domain=[0, 1])),
+            color=alt.Color("Decision:N", legend=alt.Legend(orient="top", title=None),
+                            scale=alt.Scale(domain=["Inspect now", "Keep flying"],
+                                            range=["#c0392b", "#9aa5b1"])),
+            tooltip=["unit", "cycle", alt.Tooltip("probability:Q", format=".1%"), "Decision"])
+        st.altair_chart((blind + hline).properties(height=380), width="stretch")
+        st.caption("Each dot is one test engine at its last recorded cycle. Engines above the dashed red "
+                   "line are flagged for inspection. Tick “Show the true answer” to see which "
+                   "decisions were right.")
 
     st.subheader("Engines ranked by risk")
     table = fleet.sort_values("probability", ascending=False).rename(columns={
