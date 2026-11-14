@@ -1,0 +1,38 @@
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Duplicate of data/raw/CMAPSSData/ (the extracted files are committed)
+data/raw/CMAPSSData.zip
+
+# Documents: kept locally, not in the repository
+*.pdf
+*.ppt
+*.pptx
+*.doc
+*.docx
+docs/
+improved_implementation/docs/
+improved_implementation/AUDIT.md
+improved_implementation/REPORT.md
+
+# Generated outputs (recreated by running the code)
+models/
+results/
+improved_implementation/results.csv
+improved_implementation/figures/
+improved_implementation/logs/
+improved_implementation/baseline_repro/
+
+# Scripts that only build the report and slides
+improved_implementation/src/doc_figures.py
+improved_implementation/src/make_report.py
+improved_implementation/src/make_slides.py
+improved_implementation/src/make_final_report.py
+improved_implementation/src/make_final_slides.py
+
+# Office lock files
+~$*

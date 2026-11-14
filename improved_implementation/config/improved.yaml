@@ -1,0 +1,10 @@
+# Improvement step (kept to the course goal): one simple, explainable change.
+# Everything not listed here is inherited from baseline.yaml.
+windows: [5, 10, 20, 30]            # rolling-window lengths compared (5 = as found)
+kinds_options:                       # feature sets compared at the chosen window
+  - [raw, mean, std]                 # as found
+  - [raw, mean]
+  - [mean]
+selection_split: cv_grouped5_truncated_rows_oof   # validation that mimics the test set
+selection_metric: f1
+target_recall: 0.90                  # as found: src/make_nb05.py:253
