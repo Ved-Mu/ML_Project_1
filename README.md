@@ -3,9 +3,10 @@
 Predict whether an aircraft engine will **fail within the next 30 cycles** (yes / no) from its sensor readings,
 using the NASA C-MAPSS FD001 dataset.
 
-The project has two stages. **Stage 1** (the notebooks) builds the baseline with 5-cycle rolling features.
-**Stage 2** (`improved_implementation/`) fixes the validation so that it resembles the test set and moves to a
-40-cycle window; the final model is logistic regression (test F1 0.870, all 25 failing test engines caught).
+The project has two stages. **Stage 1** (notebooks 01–05) builds the baseline with 5-cycle rolling features.
+**Stage 2** (`improved_implementation/`, walked through in notebook 06) fixes the validation so that it resembles
+the test set and moves to a 40-cycle window; the final model is logistic regression (test F1 0.870, all 25 failing
+test engines caught).
 
 ## Quick start
 
@@ -22,6 +23,7 @@ pip install -r requirements.txt
   `cd improved_implementation` then `streamlit run app/streamlit_app.py`. The app trains the model in under a second
   and opens at <http://localhost:8501>.
 - **Re-run the analysis:** `jupyter notebook`, then run `notebooks/01` to `05` in order (about 11 minutes in total on a laptop; notebook 05 takes about 6).
+  Notebook 06 (Stage 2) runs on its own in under a minute.
 
 ## Dataset
 - **NASA C-MAPSS** turbofan engine degradation simulation, subset **FD001** (100 training engines run to failure, 100 test engines, 1 operating condition, 1 fault mode).
@@ -38,6 +40,7 @@ notebooks/
   03_features_and_labels.ipynb          RUL, label, rolling features, engine-wise split
   04_models_regularization_tuning.ipynb Logistic Regression, Decision Tree, L1/L2, depth, GridSearchCV
   05_ensemble_and_performance.ipynb     Random Forest, Gradient Boosting, final comparison
+  06_stage2_improvement.ipynb           Stage 2: fair validation, window study, final model, test results
 src/                        scripts that generated the notebooks (not needed to run the project)
 improved_implementation/    stage 2: corrected validation, window study, final model, demo app
 ```
@@ -50,7 +53,8 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 Run the notebooks **in order 01 → 05** (03 creates the files that 04 and 05 read; 04 saves the models to
-`models/` that 05 loads).
+`models/` that 05 loads). Notebook 06 does not depend on them: it reads the raw data and
+`improved_implementation/results.csv`, and uses the Stage 2 code in `improved_implementation/src/`.
 
 Run the demo app (Engine Health Monitor): double-click `run_app.bat` in this folder (Windows). The app opens
 in your browser at <http://localhost:8501>; keep the black window open while you use it. From a terminal
