@@ -187,7 +187,7 @@ nb.md("""
 
 ### 4a. Did any information leak from the future or from other engines?
 
-A leak would make every score too optimistic. The Stage 2 audit checked each place where one could happen (`improved_implementation/logs/phase2_checks.txt`):
+A leak would make every score too optimistic. The Stage 2 audit checked each place where one could happen (`python src/run_phase1_2.py checks`, run from `improved_implementation/`):
 
 | Check | Result |
 |---|---|

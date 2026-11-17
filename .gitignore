@@ -22,7 +22,7 @@ improved_implementation/REPORT.md
 # Generated outputs (recreated by running the code)
 models/
 results/
-improved_implementation/results.csv
+# (improved_implementation/results.csv is committed: notebook 06 reads it, and re-creating it takes about an hour)
 improved_implementation/figures/
 improved_implementation/logs/
 improved_implementation/baseline_repro/
