@@ -41,6 +41,7 @@ notebooks/
   04_models_regularization_tuning.ipynb Logistic Regression, Decision Tree, L1/L2, depth, GridSearchCV
   05_ensemble_and_performance.ipynb     Random Forest, Gradient Boosting, final comparison
   06_stage2_improvement.ipynb           Stage 2: fair validation, window study, final model, test results
+presentation/               final presentation slides (simple version)
 src/                        scripts that generated the notebooks (not needed to run the project)
 improved_implementation/    stage 2: corrected validation, window study, final model, demo app
 ```

@@ -18,6 +18,8 @@ docs/
 improved_implementation/docs/
 improved_implementation/AUDIT.md
 improved_implementation/REPORT.md
+# ...except the public copy of the final slides (simple version, enrollment numbers removed)
+!presentation/Final_Presentation_simple.pptx
 
 # Generated outputs (recreated by running the code)
 models/
